@@ -24,6 +24,21 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="container">
+          <form className="form-inline">
+            <div className="form-group col-md-12">
+              <input
+                className="form-control col-md-11"
+                type="text"
+                placeholder="Conquer the world!"
+                id="example-text-input"
+              />
+
+              <button type="submit" className="btn btn-primary col-md-1">
+                Add
+              </button>
+            </div>
+          </form>
+
           <table className="table to-do-table">
             <thead>
               <tr>
