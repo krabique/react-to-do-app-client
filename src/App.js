@@ -30,10 +30,6 @@ class App extends Component {
     }
   }
 
-  // componentDidUpdate() {
-  //   localStorage.setItem('tasks', JSON.stringify(this.state.tasks));
-  // }
-
   fetchTasks() {
     if (localStorage.getItem('tasks').length) {
       this.setState({
