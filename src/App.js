@@ -95,8 +95,4 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  newTaskBodyValue: PropTypes.string.isRequired,
-};
-
 export default App;
