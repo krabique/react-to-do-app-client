@@ -36,6 +36,7 @@ class App extends Component {
     if (bodyIsValid(newTaskBodyValue)) {
       this.setState({
         tasks: [...tasks, { body: newTaskBodyValue }],
+        newTaskBodyValue: '',
       });
     }
   }
