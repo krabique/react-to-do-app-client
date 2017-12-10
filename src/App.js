@@ -46,13 +46,14 @@ class App extends Component {
     const { tasks } = this.state;
 
     const newTasks = (() => {
+      const filteredTasks = tasks;
       for (let i = 0; i < tasks.length; i += 1) {
         if (tasks[i].created_at === parseInt(event.target.value, 10)) {
-          tasks.splice(i, 1);
+          filteredTasks.splice(i, 1);
           break;
         }
       }
-      return tasks;
+      return filteredTasks;
     }).call();
 
     this.setState({ tasks: newTasks }, this.updateTasks);
