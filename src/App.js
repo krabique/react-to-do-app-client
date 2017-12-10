@@ -24,6 +24,17 @@ class App extends Component {
     };
   }
 
+  componentWillMount() {
+    localStorage.getItem('tasks');
+    this.setState({
+      tasks: JSON.parse(localStorage.getItem('tasks')),
+    });
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('tasks', JSON.stringify(this.state.tasks));
+  }
+
   addTask(event) {
     const bodyIsValid = (body) => {
       if (body.length > 0) {
