@@ -77,8 +77,8 @@ class App extends Component {
             </thead>
             <tbody>
               {tasks.map(task => (
-                <tr>
-                  <td key={task.body}>{task.body}</td>
+                <tr key={task.body}>
+                  <td>{task.body}</td>
                   <td>
                     <button type="button" className="btn btn-danger">
                       Delete
