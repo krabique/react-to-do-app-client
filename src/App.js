@@ -38,7 +38,7 @@ class App extends Component {
     }
   }
 
-  updateLocalStorage() {
+  updateTasks() {
     localStorage.setItem('tasks', JSON.stringify(this.state.tasks));
   }
 
@@ -53,7 +53,7 @@ class App extends Component {
           tasks: [...tasks, { created_at: Date.now(), body: newTaskBodyValue }],
           newTaskBodyValue: '',
         },
-        this.updateLocalStorage,
+        this.updateTasks,
       );
     }
   }
@@ -66,7 +66,7 @@ class App extends Component {
     event.preventDefault();
     const { tasks } = this.state;
     const newTasks = tasks.filter(hash => hash.created_at !== parseInt(event.target.value, 10));
-    this.setState({ tasks: newTasks }, this.updateLocalStorage);
+    this.setState({ tasks: newTasks }, this.updateTasks);
   }
 
   render() {
