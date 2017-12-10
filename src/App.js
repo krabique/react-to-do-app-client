@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import TasksList from './TasksList';
+import NewTaskForm from './NewTaskForm';
 
 class App extends Component {
   constructor() {
@@ -77,23 +78,12 @@ class App extends Component {
     return (
       <div className="App">
         <div className="container">
-          <form className="form-inline" onSubmit={this.addTask}>
-            <div className="form-group col-md-12">
-              <input
-                className="form-control col-md-11"
-                type="text"
-                placeholder="Conquer the world!"
-                id="body"
-                name="body"
-                value={this.state.newTaskBodyValue}
-                onChange={this.handleChange}
-              />
-              <button type="submit" disabled={!isEnabled} className="btn btn-primary col-md-1">
-                Add
-              </button>
-            </div>
-          </form>
-
+          <NewTaskForm
+            addTask={this.addTask}
+            newTaskBodyValue={newTaskBodyValue}
+            handleChange={this.handleChange}
+            isEnabled={isEnabled}
+          />
           <TasksList tasks={tasks} deleteTask={this.deleteTask} />
         </div>
       </div>
