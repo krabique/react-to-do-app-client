@@ -24,33 +24,41 @@ class App extends Component {
     };
   }
 
-  componentWillMount() {
-    localStorage.getItem('tasks');
-    this.setState({
-      tasks: JSON.parse(localStorage.getItem('tasks')),
-    });
+  componentDidMount() {
+    if (localStorage.getItem('tasks')) {
+      this.fetchTasks();
+    }
   }
 
-  componentDidUpdate() {
+  // componentDidUpdate() {
+  //   localStorage.setItem('tasks', JSON.stringify(this.state.tasks));
+  // }
+
+  fetchTasks() {
+    if (localStorage.getItem('tasks').length) {
+      this.setState({
+        tasks: JSON.parse(localStorage.getItem('tasks')),
+      });
+    }
+  }
+
+  updateLocalStorage() {
     localStorage.setItem('tasks', JSON.stringify(this.state.tasks));
   }
 
   addTask(event) {
-    const bodyIsValid = (body) => {
-      if (body.length > 0) {
-        return true;
-      }
-      return false;
-    };
+    event.preventDefault();
 
     const { tasks, newTaskBodyValue } = this.state;
 
-    event.preventDefault();
-    if (bodyIsValid(newTaskBodyValue)) {
-      this.setState({
-        tasks: [...tasks, { created_at: Date.now(), body: newTaskBodyValue }],
-        newTaskBodyValue: '',
-      });
+    if (newTaskBodyValue.length > 0) {
+      this.setState(
+        {
+          tasks: [...tasks, { created_at: Date.now(), body: newTaskBodyValue }],
+          newTaskBodyValue: '',
+        },
+        this.updateLocalStorage,
+      );
     }
   }
 
@@ -62,7 +70,7 @@ class App extends Component {
     event.preventDefault();
     const { tasks } = this.state;
     const newTasks = tasks.filter(hash => hash.created_at !== parseInt(event.target.value, 10));
-    this.setState({ tasks: newTasks });
+    this.setState({ tasks: newTasks }, this.updateLocalStorage);
   }
 
   render() {
