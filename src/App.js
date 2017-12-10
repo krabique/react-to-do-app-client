@@ -23,10 +23,21 @@ class App extends Component {
   }
 
   addTask(event) {
+    const bodyIsValid = (body) => {
+      if (body.length > 0) {
+        return true;
+      }
+      return false;
+    };
+
+    const { tasks, newTaskBodyValue } = this.state;
+
     event.preventDefault();
-    this.setState({
-      tasks: [...this.state.tasks, { body: this.state.newTaskBodyValue }],
-    });
+    if (bodyIsValid(newTaskBodyValue)) {
+      this.setState({
+        tasks: [...tasks, { body: newTaskBodyValue }],
+      });
+    }
   }
 
   handleChange(event) {
