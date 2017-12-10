@@ -7,14 +7,17 @@ class App extends Component {
 
     this.addTask = this.addTask.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
 
     this.state = {
       newTaskBodyValue: '',
       tasks: [
         {
+          created_at: Date.now(),
           body: '123.',
         },
         {
+          created_at: Date.now() + 1,
           body: '456.',
         },
       ],
@@ -34,7 +37,7 @@ class App extends Component {
     event.preventDefault();
     if (bodyIsValid(newTaskBodyValue)) {
       this.setState({
-        tasks: [...tasks, { body: newTaskBodyValue }],
+        tasks: [...tasks, { created_at: Date.now(), body: newTaskBodyValue }],
         newTaskBodyValue: '',
       });
     }
@@ -42,6 +45,13 @@ class App extends Component {
 
   handleChange(event) {
     this.setState({ newTaskBodyValue: event.target.value });
+  }
+
+  deleteTask(event) {
+    event.preventDefault();
+    const { tasks } = this.state;
+    const newTasks = tasks.filter(hash => hash.created_at !== parseInt(event.target.value, 10));
+    this.setState({ tasks: newTasks });
   }
 
   render() {
@@ -77,10 +87,15 @@ class App extends Component {
             </thead>
             <tbody>
               {tasks.map(task => (
-                <tr key={task.body}>
+                <tr key={task.created_at}>
                   <td>{task.body}</td>
                   <td>
-                    <button type="button" className="btn btn-danger">
+                    <button
+                      value={task.created_at}
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={this.deleteTask}
+                    >
                       Delete
                     </button>
                   </td>
