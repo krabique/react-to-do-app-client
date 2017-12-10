@@ -18,8 +18,8 @@ const TasksList = ({ tasks, deleteTask }) => (
 
 TasksList.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.shape({
-    created_at: PropTypes.number,
-    body: PropTypes.string,
+    created_at: PropTypes.number.isRequired,
+    body: PropTypes.string.isRequired,
   })).isRequired,
   deleteTask: PropTypes.func.isRequired,
 };
