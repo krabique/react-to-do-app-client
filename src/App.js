@@ -14,11 +14,11 @@ class App extends Component {
       tasks: [
         {
           created_at: Date.now(),
-          body: '123.',
+          body: 'Lorem ipsum dolor sit amet consectetur.',
         },
         {
           created_at: Date.now() + 1,
-          body: '456.',
+          body: 'Lorem ipsum dolor sit.',
         },
       ],
     };
