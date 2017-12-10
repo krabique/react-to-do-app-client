@@ -42,8 +42,19 @@ class App extends Component {
 
   deleteTask(event) {
     event.preventDefault();
+
     const { tasks } = this.state;
-    const newTasks = tasks.filter(hash => hash.created_at !== parseInt(event.target.value, 10));
+
+    const newTasks = (() => {
+      for (let i = 0; i < tasks.length; i += 1) {
+        if (tasks[i].created_at === parseInt(event.target.value, 10)) {
+          tasks.splice(i, 1);
+          break;
+        }
+      }
+      return tasks;
+    }).call();
+
     this.setState({ tasks: newTasks }, this.updateTasks);
   }
 
