@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
+import TasksList from './TasksList';
 
 class App extends Component {
   constructor() {
@@ -10,7 +11,6 @@ class App extends Component {
     this.deleteTask = this.deleteTask.bind(this);
 
     this.state = {
-      newTaskBodyValue: '',
       tasks: [
         {
           created_at: Date.now(),
@@ -21,6 +21,7 @@ class App extends Component {
           body: 'Lorem ipsum dolor sit.',
         },
       ],
+      newTaskBodyValue: '',
     };
   }
 
@@ -36,6 +37,13 @@ class App extends Component {
         tasks: JSON.parse(localStorage.getItem('tasks')),
       });
     }
+  }
+
+  deleteTask(event) {
+    event.preventDefault();
+    const { tasks } = this.state;
+    const newTasks = tasks.filter(hash => hash.created_at !== parseInt(event.target.value, 10));
+    this.setState({ tasks: newTasks }, this.updateTasks);
   }
 
   updateTasks() {
@@ -62,13 +70,6 @@ class App extends Component {
     this.setState({ newTaskBodyValue: event.target.value });
   }
 
-  deleteTask(event) {
-    event.preventDefault();
-    const { tasks } = this.state;
-    const newTasks = tasks.filter(hash => hash.created_at !== parseInt(event.target.value, 10));
-    this.setState({ tasks: newTasks }, this.updateTasks);
-  }
-
   render() {
     const { tasks, newTaskBodyValue } = this.state;
     const isEnabled = newTaskBodyValue.length > 0;
@@ -93,31 +94,7 @@ class App extends Component {
             </div>
           </form>
 
-          <table className="table to-do-table">
-            <thead>
-              <tr>
-                <th className="col-md-11">Description</th>
-                <th className="col-md-1">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tasks.map(task => (
-                <tr key={task.created_at}>
-                  <td>{task.body}</td>
-                  <td>
-                    <button
-                      value={task.created_at}
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={this.deleteTask}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <TasksList tasks={tasks} deleteTask={this.deleteTask} />
         </div>
       </div>
     );
