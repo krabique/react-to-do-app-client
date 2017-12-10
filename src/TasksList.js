@@ -37,17 +37,4 @@ TasksList.propTypes = {
   deleteTask: PropTypes.func.isRequired,
 };
 
-// TasksList.defaultProps = {
-//   tasks: [
-//     {
-//       created_at: Date.now(),
-//       body: 'Lorem ipsum dolor sit amet consectetur.',
-//     },
-//     {
-//       created_at: Date.now() + 1,
-//       body: 'Lorem ipsum dolor sit.',
-//     },
-//   ],
-// };
-
 export default TasksList;
