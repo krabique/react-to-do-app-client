@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Task from './Task';
 
 const TasksList = ({ tasks, deleteTask }) => (
   <table className="table to-do-table">
@@ -10,21 +11,7 @@ const TasksList = ({ tasks, deleteTask }) => (
       </tr>
     </thead>
     <tbody>
-      {tasks.map(task => (
-        <tr key={task.created_at}>
-          <td>{task.body}</td>
-          <td>
-            <button
-              value={task.created_at}
-              type="button"
-              className="btn btn-danger"
-              onClick={deleteTask}
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      ))}
+      {tasks.map(task => <Task key={task.created_at} task={task} deleteTask={deleteTask} />)}
     </tbody>
   </table>
 );
