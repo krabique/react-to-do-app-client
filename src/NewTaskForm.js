@@ -26,7 +26,7 @@ NewTaskForm.propTypes = {
   addTask: PropTypes.func.isRequired,
   newTaskBodyValue: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
-  isEnabled: PropTypes.func.isRequired,
+  isEnabled: PropTypes.bool.isRequired,
 };
 
 export default NewTaskForm;
