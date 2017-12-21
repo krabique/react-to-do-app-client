@@ -17,8 +17,6 @@ class Task extends React.Component {
   }
 
   handleChange(event) {
-    event.preventDefault();
-
     this.setState({
       newBody: event.target.value,
     });
@@ -36,7 +34,6 @@ class Task extends React.Component {
   }
 
   editTask(event) {
-    event.preventDefault();
     this.props.updateTask(this.state.newBody, this.props.task.created_at);
     this.cancelEditMode(event);
   }
