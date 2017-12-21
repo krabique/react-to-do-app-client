@@ -8,10 +8,9 @@ class App extends Component {
     super();
 
     this.addTask = this.addTask.bind(this);
-    this.handleNewTaskInputChange = this.handleNewTaskInputChange.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
     this.updateTask = this.updateTask.bind(this);
-    this.handleEditTaskInputChange = this.handleEditTaskInputChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
     this.state = {
       tasks: [
@@ -95,11 +94,7 @@ class App extends Component {
     }
   }
 
-  handleNewTaskInputChange(event) {
-    this.setState({ newTaskBodyValue: event.target.value });
-  }
-
-  handleEditTaskInputChange(event) {
+  handleChange(event) {
     this.setState({ newTaskBodyValue: event.target.value });
   }
 
@@ -113,7 +108,7 @@ class App extends Component {
           <NewTaskForm
             addTask={this.addTask}
             newTaskBodyValue={newTaskBodyValue}
-            handleNewTaskInputChange={this.handleNewTaskInputChange}
+            handleNewTaskInputChange={this.handleChange}
             isEnabled={isEnabled}
           />
           <TasksList
@@ -121,7 +116,7 @@ class App extends Component {
             deleteTask={this.deleteTask}
             updateTask={this.updateTask}
             isEditMode={this.isEditMode}
-            handleEditTaskInputChange={this.handleEditTaskInputChange}
+            handleEditTaskInputChange={this.handleChange}
           />
         </div>
       </div>
