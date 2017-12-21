@@ -6,7 +6,6 @@ class Task extends React.Component {
     super();
 
     this.toggleEditMode = this.toggleEditMode.bind(this);
-    this.cancelEditMode = this.cancelEditMode.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.editTask = this.editTask.bind(this);
 
@@ -35,15 +34,7 @@ class Task extends React.Component {
 
   editTask(event) {
     this.props.updateTask(this.state.newBody, this.props.task.created_at);
-    this.cancelEditMode(event);
-  }
-
-  cancelEditMode(event) {
-    event.preventDefault();
-
-    this.setState({
-      isEditMode: false,
-    });
+    this.toggleEditMode(event);
   }
 
   render() {
@@ -71,7 +62,7 @@ class Task extends React.Component {
               value={task.created_at}
               type="button"
               className="btn btn-warning"
-              onClick={this.cancelEditMode}
+              onClick={this.toggleEditMode}
             >
               Cancel
             </button>
