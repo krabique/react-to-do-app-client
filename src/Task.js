@@ -18,7 +18,7 @@ class Task extends React.Component {
 
   handleChange(event) {
     this.setState({
-      newBody: event.target.value,
+      newBody: event.currentTarget.value,
     });
   }
 

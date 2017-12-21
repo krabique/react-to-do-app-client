@@ -49,7 +49,7 @@ class App extends Component {
     const newTasks = () => {
       const filteredTasks = tasks;
       for (let i = 0; i < tasks.length; i += 1) {
-        if (tasks[i].created_at === parseInt(event.target.value, 10)) {
+        if (tasks[i].created_at === parseInt(event.currentTarget.value, 10)) {
           filteredTasks.splice(i, 1);
           break;
         }
@@ -95,7 +95,7 @@ class App extends Component {
   }
 
   handleChange(event) {
-    this.setState({ newTaskBodyValue: event.target.value });
+    this.setState({ newTaskBodyValue: event.currentTarget.value });
   }
 
   render() {
