@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const NewTaskForm = ({
-  addTask, newTaskBodyValue, handleChange, isEnabled,
+  addTask, newTaskBodyValue, handleNewTaskInputChange, isEnabled,
 }) => (
   <form className="form-inline" onSubmit={addTask}>
     <div className="form-group col-md-12">
@@ -13,7 +13,7 @@ const NewTaskForm = ({
         id="body"
         name="body"
         value={newTaskBodyValue}
-        onChange={handleChange}
+        onChange={handleNewTaskInputChange}
       />
       <button type="submit" disabled={!isEnabled} className="btn btn-primary col-md-1">
         Add
@@ -25,7 +25,7 @@ const NewTaskForm = ({
 NewTaskForm.propTypes = {
   addTask: PropTypes.func.isRequired,
   newTaskBodyValue: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  handleNewTaskInputChange: PropTypes.func.isRequired,
   isEnabled: PropTypes.bool.isRequired,
 };
 

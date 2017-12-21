@@ -8,8 +8,10 @@ class App extends Component {
     super();
 
     this.addTask = this.addTask.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleNewTaskInputChange = this.handleNewTaskInputChange.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
+    this.updateTask = this.updateTask.bind(this);
+    this.handleEditTaskInputChange = this.handleEditTaskInputChange.bind(this);
 
     this.state = {
       tasks: [
@@ -59,6 +61,20 @@ class App extends Component {
     this.setState({ tasks: newTasks() }, this.updateTasks);
   }
 
+  updateTask(newBody, createdAt) {
+    const { tasks } = this.state;
+
+    const index = tasks.findIndex(task => task.created_at === createdAt);
+    tasks[index].body = newBody;
+
+    this.setState(
+      {
+        tasks,
+      },
+      this.updateTasks,
+    );
+  }
+
   updateTasks() {
     localStorage.setItem('tasks', JSON.stringify(this.state.tasks));
   }
@@ -79,7 +95,11 @@ class App extends Component {
     }
   }
 
-  handleChange(event) {
+  handleNewTaskInputChange(event) {
+    this.setState({ newTaskBodyValue: event.target.value });
+  }
+
+  handleEditTaskInputChange(event) {
     this.setState({ newTaskBodyValue: event.target.value });
   }
 
@@ -93,10 +113,16 @@ class App extends Component {
           <NewTaskForm
             addTask={this.addTask}
             newTaskBodyValue={newTaskBodyValue}
-            handleChange={this.handleChange}
+            handleNewTaskInputChange={this.handleNewTaskInputChange}
             isEnabled={isEnabled}
           />
-          <TasksList tasks={tasks} deleteTask={this.deleteTask} />
+          <TasksList
+            tasks={tasks}
+            deleteTask={this.deleteTask}
+            updateTask={this.updateTask}
+            isEditMode={this.isEditMode}
+            handleEditTaskInputChange={this.handleEditTaskInputChange}
+          />
         </div>
       </div>
     );
