@@ -111,6 +111,7 @@ class App extends Component {
             handleNewTaskInputChange={this.handleChange}
             isEnabled={isEnabled}
           />
+          <div>Click a task to edit it! It saves to local storage.</div>
           <TasksList
             tasks={tasks}
             deleteTask={this.deleteTask}
